@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://gamedev44.github.io/IronWill/sitemap.xml
+Sitemap: https://gamedev44.github.io/BeyondProtocol_Lite/sitemap.xml
