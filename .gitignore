@@ -1,0 +1,75 @@
+# Beyond Protocol: Lite Edition (static web build)
+# Only the files the game loads are committed: the HTML page, js/, tex/, sfx/, maps/, icons/, deck/ and the root files.
+
+# Dev tools and debug pages from the source build (about 200 MB, browser profiles included)
+custom/
+src/
+_chrome*/
+**/Default/
+**/Crashpad/
+
+# Debug and backup files
+*.bak
+*.orig
+*.tmp
+*.log
+skin-cmd.json
+uefn-*.glb
+screen-capture*.png
+shots-*/
+
+# Raw art and source assets (only the baked web versions ship)
+*.fbx
+*.FBX
+*.blend
+*.blend1
+*.psd
+*.kra
+*.xcf
+*.exr
+*.hdr
+*.tga
+*.tif
+*.tiff
+*.wav
+*.flac
+*.aiff
+*.max
+*.ma
+*.mb
+*.obj
+*.uasset
+*.umap
+
+# Unreal project folders, in case editor files land here
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+.vs/
+*.sln
+*.VC.db
+
+# Archives and large binaries
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.exe
+*.dll
+*.pdb
+
+# Node and Python
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+
+# Editors and OS
+.vscode/
+.idea/
+.cursor/
+Thumbs.db
+desktop.ini
+.DS_Store
