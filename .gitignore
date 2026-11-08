@@ -8,6 +8,19 @@ _chrome*/
 **/Default/
 **/Crashpad/
 
+# Secrets: Stripe keys, store signing key, 2FA backup and console codes live only on the owner's machine and in the repo's
+# GitHub Actions secrets (STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY, STORE_SIGNING_JWK), never in a commit
+.env
+.env.*
+**/.env
+**/.env.*
+api/
+notes/
+**/notes/
+*signing-key*.json
+*2fa*
+cheat-codes*
+
 # Debug and backup files
 *.bak
 *.orig
