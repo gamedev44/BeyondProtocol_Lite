@@ -21,7 +21,7 @@ Solo against bots or online with friends, on phone or computer, with nothing to 
 [![Players](https://img.shields.io/badge/players-1--8_online-F5C81E?style=flat-square&labelColor=0E110D)](#multiplayer)
 [![Modes](https://img.shields.io/badge/modes-3-F5C81E?style=flat-square&labelColor=0E110D)](#game-modes)
 [![Maps](https://img.shields.io/badge/maps-9-F5C81E?style=flat-square&labelColor=0E110D)](#maps)
-[![Classes](https://img.shields.io/badge/classes-6-F5C81E?style=flat-square&labelColor=0E110D)](#classes)
+[![Classes](https://img.shields.io/badge/classes-5-F5C81E?style=flat-square&labelColor=0E110D)](#classes)
 
 [![Platform](https://img.shields.io/badge/platform-Browser_%7C_Mobile_%7C_Steam_Deck-2B2F2A?style=flat-square&logo=html5&logoColor=white)](#install-as-an-app)
 [![Built with BismuthJS](https://img.shields.io/badge/built_with-BismuthJS-8E6FD8?style=flat-square)](#tech-stack)
@@ -137,12 +137,11 @@ Jump straight into a match against bots, or send a link to friends and play toge
 |---|---|---|
 | **Assault** | M4 | M9 |
 | **Rusher** | MP5 | M9 |
-| **Marksman** | L96 | M9 |
+| **Sniper** | L96 | M9 |
 | **Breacher** | M1014 | M9 |
-| **Gunner** | M249 | MGL |
-| **Rocketeer** | RPG | Crossbow |
+| **Marksman** | Dragunov SVD | M9 |
 
-Weapons are built procedurally in code, and each class can be customized with attachments and camos.
+Weapons are built procedurally in code, and each class can be customized with attachments and camos. The Gunner class (M249) and the launchers (RPG-7, M32, explosive crossbow) are held back until their own models are finished.
 
 <sub>[⬆ Back to top](#beyond-protocol-lite-edition)</sub>
 
