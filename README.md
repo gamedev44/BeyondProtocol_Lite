@@ -1,11 +1,11 @@
 <div align="center">
 
 <a href="https://gamedev44.github.io/BeyondProtocol_Lite/">
-  <img src="https://img.shields.io/badge/%E2%96%B6%20PLAY%20NOW-gamedev44.github.io%2FBeyondProtocol__Lite-F5C81E?style=for-the-badge&labelColor=0E110D" alt="Play Now: gamedev44.github.io/BeyondProtocol_Lite" height="64">
+  <img src="icons/apercu.eb14c978.jpg" alt="Beyond Protocol: Lite Edition. Click to play." width="100%">
 </a>
 
 <a href="https://gamedev44.github.io/BeyondProtocol_Lite/">
-  <img src="icons/apercu.eb14c978.jpg" alt="Beyond Protocol: Lite Edition. Click to play." width="100%">
+  <img src="https://img.shields.io/badge/%E2%96%B6%20PLAY%20NOW-gamedev44.github.io%2FBeyondProtocol_Lite-F5C81E?style=for-the-badge&labelColor=0E110D" alt="Play Now: gamedev44.github.io/BeyondProtocol_Lite" height="64">
 </a>
 
 <a id="beyond-protocol-lite-edition"></a>
