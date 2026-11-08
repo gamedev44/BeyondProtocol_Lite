@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-kRiRyLTJdOSVuzmcCMsMCFwOJoJ+11AtaQpB/FS56P4=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-q7D0U53Gq9tCiDknHO/ra6KkPA0SKuqRt9rXiPrs9XY=' https://cdn.jsdelivr.net/npm/peerjs@1.5.5/; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' https://*.peerjs.com wss://*.peerjs.com stun: turn:; manifest-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Beyond Protocol">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="cod-relay" content="">
-<meta name="cod-build" content="361deab39f35">
+<meta name="cod-build" content="2b651ede396b">
 <meta name="menu-music" content="menu-theme.mp3?v=1b342264">
 <title>Beyond Protocol: Lite Edition</title>
 <!-- Shared-link preview (Discord, WhatsApp, social) and canonical URL: address and image are set by build.py (SITE, assets/apercu.jpg).
@@ -6671,17 +6671,17 @@ function makeInput(){return{mx:0,mz:0,sprint:false,crouch:false,slide:false,jump
 function makeArms(ids,reserveMul=1){return{slots:ids.map((w)=>{const def=typeof w==='string'?WEAPONS[w]:w;return{def,mag:def.mag,reserve:Math.round(def.reserve*reserveMul)};}),cur:0,fireCd:0.3,reload:null,boltT:0,switching:0,switchTo:-1,adsW:0,sprintW:0,bloom:0,burstN:0,lastShotAt:-9,autoReload:0,shots:0,knife:false,};}
 function armsW(ent){return ent.arms.slots[ent.arms.cur];}
 function initCtl(ent,ids,reserveMul){ent.input=makeInput();ent.arms=makeArms(ids,reserveMul);ent.onGround=true;ent.vy=0;ent.eyeH=1.62;ent.airVy=0;ent.slideT=0;ent.slideCd=0;ent.slideBuf=0;ent.slideAmt=0;ent.sprinting=false;ent.jumpHeld=false;ent.busy=false;ent.blockSprint=false;ent.adsActive=false;}
-const MOVE_SPEED=4.75,MOVE_ACC=[16.5,13.5],SPRINT_MUL=1.55;const KNIFE_MOVE=1.15;const SLIDE={dur:0.75,cd:0.26,cdWall:0.12,boost:1.4,floor:6.8,max:10.3,min:3.0,end:3.1,turn:2.0,buffer:0.3};const WALLRUN={min:4.0,speed:7.6,max:9.8,dur:1.6,reach:0.24,kick:5.4,jump:6.6,cd:0.25,roll:0.14,dbl:6.2,dblSpeed:6.5,dblSteer:0.75};const _wrp={nx:0,nz:0};function wallProbe(ent,r){const feet=ent.pos.y,x=ent.pos.x,z=ent.pos.z,R=r+WALLRUN.reach;let best=R;for(const c of queryBoxes(x-R,z-R,x+R,z+R)){if(c.ray||c.inv||c.y0>feet+0.4||c.y1<feet+1.6)continue;const cx=clamp(x,c.x0,c.x1),cz=clamp(z,c.z0,c.z1),dx=x-cx,dz=z-cz,dd=hyp(dx,dz);if(dd<1e-4||dd>=best)continue;best=dd;_wrp.nx=dx/dd;_wrp.nz=dz/dd;}
+const MOVE_SPEED=4.75,MOVE_ACC=[16.5,13.5],SPRINT_MUL=1.55;const KNIFE_MOVE=1.15;const SLIDE={dur:0.75,cd:0.26,cdWall:0.12,boost:1.4,floor:6.8,max:10.3,min:3.0,end:3.1,turn:2.0,buffer:0.3};const WALLRUN={min:4.0,speed:7.6,max:9.8,dur:1.6,reach:0.24,kick:5.4,jump:6.6,cd:0.25,roll:0.14,dbl:6.4,dblGrav:0.94,dblSpeed:6.5,dblSteer:0.75};const _wrp={nx:0,nz:0};function wallProbe(ent,r){const feet=ent.pos.y,x=ent.pos.x,z=ent.pos.z,R=r+WALLRUN.reach;let best=R;for(const c of queryBoxes(x-R,z-R,x+R,z+R)){if(c.ray||c.inv||c.y0>feet+0.4||c.y1<feet+1.6)continue;const cx=clamp(x,c.x0,c.x1),cz=clamp(z,c.z0,c.z1),dx=x-cx,dz=z-cz,dd=hyp(dx,dz);if(dd<1e-4||dd>=best)continue;best=dd;_wrp.nx=dx/dd;_wrp.nz=dz/dd;}
 return best<R?_wrp:null;}
-function ctlWallRun(ent,I,d,dt){ent.wrCd=Math.max(0,(ent.wrCd||0)-dt);if(ent.onGround){ent.wrT=0;ent.wrUsed=null;ent.airJumps=0;return false;}
+function ctlWallRun(ent,I,d,dt,jumped){ent.wrCd=Math.max(0,(ent.wrCd||0)-dt);if(ent.onGround){ent.wrT=0;ent.wrUsed=null;ent.airJumps=1;return false;}
 const on=ent.wrT>0,w=!ent.crouch&&I.mz>0.3&&ent.wrCd<=0?wallProbe(ent,0.36):null;let ok=false,tx=0,tz=0,tl=0;if(w){const vn=ent.vel.x*w.nx+ent.vel.z*w.nz;tx=ent.vel.x-vn*w.nx;tz=ent.vel.z-vn*w.nz;tl=hyp(tx,tz);const same=!on&&ent.wrUsed&&ent.wrUsed.x*w.nx+ent.wrUsed.z*w.nz>0.9;ok=!same&&tl>(on?2.5:WALLRUN.min)&&(on||ent.pos.y-groundHeight(ent.pos.x,ent.pos.z,ent.pos.y,0.3)>0.35);}
 if(!ok){if(on){ent.wrT=0;ent.wrUsed={x:ent.wrN.x,z:ent.wrN.z};ent.wrCd=WALLRUN.cd;ent.airJumps=1;return false;}
-if(I.jump&&!ent.jumpHeld&&ent.airJumps>0)return ctlDoubleJump(ent,I);return false;}
+if(I.jump&&!ent.jumpHeld&&!jumped&&ent.airJumps>0)return ctlDoubleJump(ent,I);return false;}
 if(!on){ent.wrT=WALLRUN.dur;ent.vy=clamp(ent.vy,0.6,3);ent.wrN={x:0,z:0};ent.wrStart=true;ent.airJumps=0;}
 ent.wrN.x=w.nx;ent.wrN.z=w.nz;const sp=clamp(tl,WALLRUN.speed*Math.min(1,d.move),WALLRUN.max);ent.vel.x=tx/tl*sp-w.nx*0.8;ent.vel.z=tz/tl*sp-w.nz*0.8;ent.wrT-=dt;if(I.jump&&!ent.jumpHeld){ent.vel.x=tx/tl*sp+w.nx*WALLRUN.kick;ent.vel.z=tz/tl*sp+w.nz*WALLRUN.kick;ent.vy=WALLRUN.jump;ent.wrT=0;ent.wrUsed={x:w.nx,z:w.nz};ent.wrCd=WALLRUN.cd;ent.airJumps=1;return true;}
 if(ent.wrT<=0){ent.wrT=0;ent.wrUsed={x:w.nx,z:w.nz};ent.wrCd=WALLRUN.cd;ent.airJumps=1;}
 return false;}
-function ctlDoubleJump(ent,I){ent.airJumps=0;ent.vy=WALLRUN.dbl;ent.dblJump=true;const fx=-Math.sin(ent.yaw),fz=-Math.cos(ent.yaw),rx=Math.cos(ent.yaw),rz=-Math.sin(ent.yaw);let wx=fx*I.mz+rx*I.mx,wz=fz*I.mz+rz*I.mx;const wl=hyp(wx,wz),hs=hyp(ent.vel.x,ent.vel.z);if(wl>0.2){wx/=wl;wz/=wl;let dx=hs>0.1?ent.vel.x/hs:wx,dz=hs>0.1?ent.vel.z/hs:wz;dx=lerp(dx,wx,WALLRUN.dblSteer);dz=lerp(dz,wz,WALLRUN.dblSteer);const dl=hyp(dx,dz)||1;const sp=clamp(hs,WALLRUN.dblSpeed,WALLRUN.max);ent.vel.x=dx/dl*sp;ent.vel.z=dz/dl*sp;}
+function ctlDoubleJump(ent,I){ent.airJumps=0;ent.vy=WALLRUN.dbl;ent.dblJump=true;ent.dblRise=true;const fx=-Math.sin(ent.yaw),fz=-Math.cos(ent.yaw),rx=Math.cos(ent.yaw),rz=-Math.sin(ent.yaw);let wx=fx*I.mz+rx*I.mx,wz=fz*I.mz+rz*I.mx;const wl=hyp(wx,wz),hs=hyp(ent.vel.x,ent.vel.z);if(wl>0.2){wx/=wl;wz/=wl;let dx=hs>0.1?ent.vel.x/hs:wx,dz=hs>0.1?ent.vel.z/hs:wz;dx=lerp(dx,wx,WALLRUN.dblSteer);dz=lerp(dz,wz,WALLRUN.dblSteer);const dl=hyp(dx,dz)||1;const sp=clamp(hs,WALLRUN.dblSpeed,WALLRUN.max);ent.vel.x=dx/dl*sp;ent.vel.z=dz/dl*sp;}
 return true;}
 const SWITCH={dur:0.44,swap:0.24};function ctlMove(ent,dt){const I=ent.input,A=ent.arms,d=armsW(ent).def;let sprint=I.sprint&&I.mz>0.3&&!I.ads&&!ent.blockSprint&&A.boltT<=0&&(!ent.busy||ent.sprintBusyOk);ent.slideCd=Math.max(0,(ent.slideCd||0)-dt);let slid=false,sliding=(ent.slideT||0)>0;if(I.slide){ent.slideBuf=SLIDE.buffer;I.slide=false;}
 if(ent.slideBuf>0){if(!sliding&&ent.slideCd<=0&&ent.onGround)ent.slideBuf-=dt;const v0=hyp(ent.vel.x,ent.vel.z);if(!sliding&&sprint&&ent.onGround&&ent.slideCd<=0&&v0>SLIDE.min){ent.slideT=SLIDE.dur;ent.slideSpd=Math.min(SLIDE.max,Math.max(SLIDE.floor,v0*SLIDE.boost));ent.slideDx=ent.vel.x/v0;ent.slideDz=ent.vel.z/v0;sliding=slid=true;ent.slideBuf=0;}}
@@ -6690,13 +6690,14 @@ const acc=ent.onGround?MOVE_ACC[sprint?1:0]:2.2;let slideV=0;if(sliding){const k
 ent.vel.x=ent.slideDx*slideV;ent.vel.z=ent.slideDz*slideV;ent.slideT-=dt;if(ent.slideT<=0){ent.slideT=0;ent.slideCd=SLIDE.cd;}}else{ent.vel.x=damp(ent.vel.x,wx*spd,acc,dt);ent.vel.z=damp(ent.vel.z,wz*spd,acc,dt);}
 let jumped=false;if(I.jump&&ent.onGround&&!ent.jumpHeld){if(sliding){ent.slideT=0;ent.slideCd=SLIDE.cd;ent.crouch=false;sliding=false;ent.vy=6.3;ent.onGround=false;jumped=true;}
 else if(ent.crouch)ent.crouch=false;else{ent.vy=6.3;ent.onGround=false;jumped=true;}}
-if(ent.isPlayer&&ctlWallRun(ent,I,d,dt))jumped=true;ent.jumpHeld=!!I.jump;const px0=ent.pos.x,pz0=ent.pos.z;ent.pos.x+=ent.vel.x*dt;ent.pos.z+=ent.vel.z*dt;if(!ent.crouch&&ent.onGround&&ceilingAbove(ent.pos.x,ent.pos.z,ent.pos.y+0.3,0.3)<ent.pos.y+1.77)ent.crouch=true;const height=ent.crouch?1.2:1.75;if(MATCH.time-(ent.spawnAt||-99)<3)spawnPush(ent,dt);collideCircle(ent.pos,ent.isPlayer?0.36:0.34,height);if(VOID.on&&!ent.isPlayer&&ent.onGround&&(ent.pos.x!==px0||ent.pos.z!==pz0)){const y=ent.pos.y,hole=(x,z)=>{const dx=x-px0,dz=z-pz0,l=hyp(dx,dz)||1;return groundHeight(x,z,y,0.3)<=VOID.floor+1||groundHeight(x+dx/l*0.25,z+dz/l*0.25,y,0.3)<=VOID.floor+1;};if(hole(ent.pos.x,ent.pos.z)){if(ent.pos.z!==pz0&&!hole(ent.pos.x,pz0)){ent.pos.z=pz0;ent.vel.z=0;}
+if(ent.isPlayer&&ctlWallRun(ent,I,d,dt,jumped))jumped=true;ent.jumpHeld=!!I.jump;const px0=ent.pos.x,pz0=ent.pos.z;ent.pos.x+=ent.vel.x*dt;ent.pos.z+=ent.vel.z*dt;if(!ent.crouch&&ent.onGround&&ceilingAbove(ent.pos.x,ent.pos.z,ent.pos.y+0.3,0.3)<ent.pos.y+1.77)ent.crouch=true;const height=ent.crouch?1.2:1.75;if(MATCH.time-(ent.spawnAt||-99)<3)spawnPush(ent,dt);collideCircle(ent.pos,ent.isPlayer?0.36:0.34,height);if(VOID.on&&!ent.isPlayer&&ent.onGround&&(ent.pos.x!==px0||ent.pos.z!==pz0)){const y=ent.pos.y,hole=(x,z)=>{const dx=x-px0,dz=z-pz0,l=hyp(dx,dz)||1;return groundHeight(x,z,y,0.3)<=VOID.floor+1||groundHeight(x+dx/l*0.25,z+dz/l*0.25,y,0.3)<=VOID.floor+1;};if(hole(ent.pos.x,ent.pos.z)){if(ent.pos.z!==pz0&&!hole(ent.pos.x,pz0)){ent.pos.z=pz0;ent.vel.z=0;}
 else if(ent.pos.x!==px0&&!hole(px0,ent.pos.z)){ent.pos.x=px0;ent.vel.x=0;}
 else{ent.pos.x=px0;ent.pos.z=pz0;ent.vel.x=ent.vel.z=0;}
 ent.edgeT=MATCH.time;}}
 if(sliding&&ent.slideT>0&&hyp(ent.pos.x-px0,ent.pos.z-pz0)<slideV*dt*0.35){ent.slideT=0;ent.slideCd=SLIDE.cdWall;sliding=false;}
 if(ent.wrT>0){ent.vy-=19*dt*lerp(0.1,0.65,1-ent.wrT/WALLRUN.dur);ent.vy=Math.max(ent.vy,-2);}
-else ent.vy-=19*dt;ent.pos.y+=ent.vy*dt;const g=groundHeight(ent.pos.x,ent.pos.z,Math.max(ent.pos.y,ent.pos.y-ent.vy*dt),0.3);if(ent.vy>0){const c=ceilingAbove(ent.pos.x,ent.pos.z,ent.pos.y+0.3,0.3);if(c<ent.pos.y+height+0.05)ent.vy=0;}
+else{if(ent.vy<=0)ent.dblRise=false;ent.vy-=19*dt*(ent.dblRise?WALLRUN.dblGrav:1);}
+ent.pos.y+=ent.vy*dt;const g=groundHeight(ent.pos.x,ent.pos.z,Math.max(ent.pos.y,ent.pos.y-ent.vy*dt),0.3);if(ent.vy>0){const c=ceilingAbove(ent.pos.x,ent.pos.z,ent.pos.y+0.3,0.3);if(c<ent.pos.y+height+0.05)ent.vy=0;}
 let landed=0;if(ent.pos.y<=g){if(!ent.onGround&&ent.airVy<-6)landed=ent.airVy;ent.pos.y=g;ent.vy=0;ent.onGround=true;}
 else if(ent.onGround&&ent.vy<=0&&ent.pos.y-g<STEP+0.05){ent.pos.y=g;ent.vy=0;}
 else ent.onGround=false;ent.airVy=ent.vy;if(sliding&&!ent.onGround){ent.slideT=0;ent.slideCd=SLIDE.cd;sliding=false;}
